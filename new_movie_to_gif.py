@@ -1,23 +1,22 @@
+# importing libraries
+import cv2
 from moviepy.editor import *
 from pygifsicle import optimize
 
-# import subprocess
+# subprocess.run('ffmeg -i ' + gif_video + ' -vcodec libx264 -crf 22' + output) #TRY TO COMPRESS USING FFMEG. THIS SHOULD BE
+# DONE AFTER THE GIF CREATION
 
-# gif_video = "Triaxis.mp4"
-# output = "Triaxis_compressed.mp4"
-# subprocess.run('ffmeg -i ' + gif_video + ' -vcodec libx264 -crf 22' + output)
+video_path = "path_to_video.mp4"
+gif_path = 'gif_path.gif'
 
-path = 'Triaxis.gif'
-clip = (VideoFileClip('Triaxis.mp4')
+clip = (VideoFileClip(video_path)
         .subclip()
         .resize(0.3))
-clip.write_gif(path)
+clip.write_gif(gif_path)
 
-# importing libraries
-import cv2
-
+# Open the created gif. It's not a necessary step but it's cool :)
 # Create a VideoCapture object and read from input file
-cap = cv2.VideoCapture('Triaxis.gif')
+cap = cv2.VideoCapture('gif_path')
 
 # Check if camera opened successfully
 if (cap.isOpened() == False):
@@ -47,4 +46,5 @@ cap.release()
 # Closes all the frames
 cv2.destroyAllWindows()
 
-optimize(path)
+# Optimize the gif size
+optimize(gif_path)
